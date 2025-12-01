@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery</title>
+<style>
+body{ background:black; color:white; font-family:Arial; text-align:center; }
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px; padding:20px;}
+img{ width:100%; border-radius:8px; border:2px solid #444; }
+</style>
+</head>
+<body>
+<h1>Uploaded Photos</h1>
+<div class="grid" id="gallery"></div>
+
+<script>
+fetch('/list')
+.then(r=>r.json())
+.then(files=>{
+ let g=document.getElementById('gallery');
+ files.forEach(f=>{
+   let img=document.createElement('img');
+   img.src='/photos/' + f;
+   g.appendChild(img);
+ });
+});
+</script>
+</body>
+</html>
